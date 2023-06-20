@@ -77,4 +77,23 @@ public class ScoreBoardTest {
         assertEquals(homeScore1 + awayScore1, updatedMatchesInProgress.get(1).getTotalScore());
         assertEquals(homeScore2 + awayScore2, updatedMatchesInProgress.get(0).getTotalScore());
     }
+
+    @Test
+    public void shouldFinishMatch() {
+        Team Mexico = new Team("Mexico", 0);
+        Team Canada = new Team("Canada", 0);
+
+        scoreBoard.startNewMatch(Mexico.getName(), Canada.getName());
+
+        List<Match> matches = scoreBoard.getMatchesOrderedByTotalScore();
+        assertEquals(1, matches.size());
+
+        Match match = matches.get(0);
+        String matchId = match.getId();
+
+        scoreBoard.finishMatch(matchId);
+
+        matches = scoreBoard.getMatchesOrderedByTotalScore();
+        assertEquals(0, matches.size());
+    }
 }

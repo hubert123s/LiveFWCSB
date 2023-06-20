@@ -26,4 +26,8 @@ public class ScoreBoard {
         matchesInProgress.sort(Comparator.comparingInt(Match::getTotalScore).reversed().thenComparing(Match::getStartTime));
         return matchesInProgress;
     }
+
+    public void finishMatch(String matchId) {
+        matches.remove(matchId);
+    }
 }
